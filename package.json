@@ -7,7 +7,7 @@
     "test": "jest",
     "dev": "npx tsx watch src",
     "build": "rm -rf dist && npx tsc",
-    "public": "npm run build && npm run publish"
+    "publish": "npm run build && npm run publish"
   },
   "keywords": [],
   "author": "",
