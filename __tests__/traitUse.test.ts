@@ -1,4 +1,4 @@
-import use from "../src/";
+import use from "../src/traitUse";
 import { faker } from "@faker-js/faker";
 
 describe("Testing method use", () => {

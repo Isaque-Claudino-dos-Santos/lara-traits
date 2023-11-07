@@ -1,7 +1,7 @@
 import { Constructor } from "./Types";
 import { PROP_CONSTRUCTORS } from "./bootstrep";
 
-export default function use(
+export default function traitUse(
   target: object,
   traits: Constructor<object>[]
 ): void {

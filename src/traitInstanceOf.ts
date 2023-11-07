@@ -1,7 +1,7 @@
 import { Constructor } from "./Types";
 import { PROP_CONSTRUCTORS } from "./bootstrep";
 
-export default function instanceOf(
+export default function traitInstanceOf(
   target: object,
   cls: Constructor<object>
 ): boolean {
