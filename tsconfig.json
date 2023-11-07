@@ -17,7 +17,9 @@
     "noImplicitOverride": true,
     "noImplicitThis": true,
     "noPropertyAccessFromIndexSignature": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "declaration": true,
+    "declarationDir": "dist"
   },
   "files": ["src/index.ts"],
   "exclude": ["node_modules"],

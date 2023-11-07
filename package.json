@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "dev": "npx tsx watch src",
-    "build": "npx tsc"
+    "build": "rm -rf dist && npx tsc",
+    "public": "npm run build && npm run publish"
   },
   "keywords": [],
   "author": "",
