@@ -1,0 +1,21 @@
+{
+  "name": "lara-trait",
+  "version": "1.0.0",
+  "description": "Trait with Javascritp/Typescript",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "npx tsx watch src",
+    "build": "npx tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.7",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "tsx": "^3.14.0",
+    "typescript": "^5.2.2"
+  }
+}
