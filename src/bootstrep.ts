@@ -1,0 +1,1 @@
+export const PROP_CONSTRUCTORS = '__CONSTRUCTORS__'
