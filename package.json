@@ -1,6 +1,6 @@
 {
-  "name": "lara-trait",
-  "version": "1.0.7",
+  "name": "lara-traits",
+  "version": "1.0.0",
   "description": "Trait with Javascritp/Typescript",
   "main": "dist/index.js",
   "scripts": {
