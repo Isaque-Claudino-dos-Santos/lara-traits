@@ -123,3 +123,7 @@ Caso tenha alguma ideia ou necessite de uma funcionalidade especifica use o repo
 #### Bugs 🐞
 
 Se em seu desenvolvimento encontrar algum bug, tire print da tela do código e erros, envie para para o e-mail **isaqueclaudinosec@gmail.com**, vou fazer o possivel para corrigin o mais rapido possível.
+
+### Feedback 🧠
+
+Por favor envie **feedback** no e-email **isaqueclaudinosec@gmail.com**, pode me ajudar muito a melhorar este projeto e futuros. 
