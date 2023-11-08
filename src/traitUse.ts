@@ -6,7 +6,7 @@ export default function traitUse(
   traits: Constructor<object>[]
 ): void {
   for (const Trait of traits) {
-    const trait = new Trait()
+    const trait = Object.getPrototypeOf(new Trait())
     Object.assign(target, { ...trait });
 
     const props = Object.getOwnPropertyNames(trait);
