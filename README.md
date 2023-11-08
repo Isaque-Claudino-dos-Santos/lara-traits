@@ -1,8 +1,8 @@
 # lara-traits
 
-### Importar lara-trait
+### Importar lara-traits
 ``` typescript
-import trait from 'lara-trait'
+import trait from 'lara-traits'
 ```
 
 ### use()
@@ -10,7 +10,7 @@ import trait from 'lara-trait'
 O função `use` mescla funções e variaveis de uma ou mais classe para o objeto alvo.
 
 ``` typescript
-import trait from 'lara-trait'
+import trait from 'lara-traits'
 
 class Vector2 {
   public x: number = 0
@@ -48,7 +48,7 @@ rect {
 O metodo `instanceOf` verifica se o objeto alvo esta sendo implentado por alguma class usada como trait.
 
 ``` typescript
-import trait from 'lara-trait'
+import trait from 'lara-traits'
 
 class Vector2 {
   public x: number = 0
@@ -87,7 +87,7 @@ Quando você estiver utilizando Typescript provavelmente repetindo os exemplos a
 para solucionar este probloca pode ser utilizado da segunte forma.
 
 ``` typescript
-import trait from 'lara-trait'
+import trait from 'lara-traits'
 
 class Vector2 {
   public x: number = 0
