@@ -83,7 +83,7 @@ FALSE
 
 ### Resolver problema de detecção de tipagem
 
-Quando você estiver utilizando Typescript provavelmente repetindo os exemplos a cima, o compilador vai lançar um erro informando que certa propriendade ou metodo erdado não existe,
+Quando você estiver utilizando Typescript provavelmente repetindo os exemplos a cima, o compilador vai lançar um erro informando que certa propriedade ou metodo herdado não existe,
 para solucionar este probloca pode ser utilizado da segunte forma.
 
 ``` typescript
@@ -112,4 +112,14 @@ class Rect {
 
 No exemplo a cima o compilador do Typescript não lançara um erro, isso porque logo a cima da class `Rect` foi criada uma interface com o mesmo nome da class que estende as classes que serve com trait para `Rect`.
 
->Essa foi a solução que encontrei para o compilador do Typescript não lançar um erro, essa forma não foi como eu queria, mas no typescript não encontrei uma solução que injetasse os tipos por dentro de uma função passados no segundo parametro de `use`. 
+>Essa foi a solução que encontrei para o compilador do Typescript não lançar um erro, essa forma não foi como eu queria, mas no typescript não encontrei uma solução que injetasse os tipos por dentro de uma função passados no segundo parametro de `use`.
+
+### Bora Colaborar 🎉
+
+#### Funcionalidades ⚙️
+
+Caso tenha alguma ideia ou necessite de uma funcionalidade especifica use o repositório do GitHub para colaborar.
+
+#### Bugs 🐞
+
+Se em seu desenvolvimento encontrar algum bug, tire print da tela do código e erros, envie para para o e-mail **isaqueclaudinosec@gmail.com**, vou fazer o possivel para corrigin o mais rapido possível.
