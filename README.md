@@ -1,4 +1,4 @@
-# lara-trait
+# lara-traits
 
 ### Importar lara-trait
 ``` typescript
