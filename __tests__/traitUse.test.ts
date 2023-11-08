@@ -3,16 +3,16 @@ import { faker } from "@faker-js/faker";
 
 describe("Testing method use", () => {
   test("Should add variable in object", () => {
-    const key1 = "name1";
-    const value1 = faker.person.firstName();
-    const key2 = "name1";
-    const value2 = faker.person.firstName();
+    const keyName = "name";
+    const nameValue = faker.person.firstName();
+    const keyAge = "age";
+    const ageValue = faker.number.int({ max: 3 });
     class A {
-      [key1] = value1;
+      [keyName] = nameValue;
     }
 
     class B {
-      [key2] = value2;
+      [keyAge] = ageValue;
     }
 
     interface C extends A, B {}
@@ -24,10 +24,10 @@ describe("Testing method use", () => {
 
     const c = new C();
 
-    expect(key1 in c).toBeTruthy();
-    expect(c[key1]).toEqual(value1);
+    expect(keyName in c).toBeTruthy();
+    expect(c[keyName]).toEqual(nameValue);
 
-    expect(key2 in c).toBeTruthy();
-    expect(c[key2]).toEqual(value2);
+    expect(keyAge in c).toBeTruthy();
+    expect(c[keyAge]).toEqual(ageValue);
   });
 });
