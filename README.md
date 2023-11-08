@@ -112,4 +112,4 @@ class Rect {
 
 No exemplo a cima o compilador do Typescript não lançara um erro, isso porque logo a cima da class `Rect` foi criada uma interface com o mesmo nome da class que estende as classes que serve com trait para `Rect`.
 
->Essa foi a solução que encontrei para o compilador do Typescript não lançar um erro, essa forma não foi como eu queria, mas no typescript não encontrei uma solução que injetasse os tipos >por dentro de uma função passados no segundo parametro de `use`. 
+>Essa foi a solução que encontrei para o compilador do Typescript não lançar um erro, essa forma não foi como eu queria, mas no typescript não encontrei uma solução que injetasse os tipos por dentro de uma função passados no segundo parametro de `use`. 
