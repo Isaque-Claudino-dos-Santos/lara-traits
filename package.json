@@ -1,6 +1,6 @@
 {
   "name": "lara-trait",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Trait with Javascritp/Typescript",
   "main": "dist/index.js",
   "scripts": {
@@ -8,7 +8,13 @@
     "dev": "npx tsx watch src",
     "build": "rm -rf dist && npx tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "trait",
+    "merge",
+    "typescript",
+    "class",
+    "ts-trait"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
