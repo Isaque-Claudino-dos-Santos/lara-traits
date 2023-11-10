@@ -1,8 +1,9 @@
 import traitInstanceOf from "./traitInstanceOf";
-import traitUse from "./traitUse";
+import TraitUse from "./TraitUse";
+
 
 namespace trait {
-  export const use = traitUse;
+  export const use = new TraitUse().use;
   export const instanceOf = traitInstanceOf;
 }
 
