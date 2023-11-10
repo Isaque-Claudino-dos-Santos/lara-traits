@@ -1,5 +1,7 @@
-import trait from "../src/index";
+import TraitUse from '../src/TraitUse'
 import { faker } from "@faker-js/faker";
+
+const traitUse = new TraitUse()
 
 describe("Testing method use", () => {
   test("Should add only one variable in object", () => {
@@ -13,7 +15,7 @@ describe("Testing method use", () => {
     interface Parent extends BaseTrait {}
     class Parent {
       constructor() {
-        trait.use(this, [BaseTrait]);
+        traitUse.mergeProperties(this, [BaseTrait]);
       }
     }
 
@@ -33,7 +35,7 @@ describe("Testing method use", () => {
     interface Parent extends BaseTrait {}
     class Parent {
       constructor() {
-        trait.use(this, [BaseTrait]);
+        traitUse.mergeFunctions(this, [BaseTrait]);
       }
     }
 
