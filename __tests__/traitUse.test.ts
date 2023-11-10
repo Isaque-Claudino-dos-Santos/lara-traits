@@ -1,4 +1,4 @@
-import trait from "../src/index.ts";
+import trait from "../src/index";
 import { faker } from "@faker-js/faker";
 
 describe("Testing method use", () => {
