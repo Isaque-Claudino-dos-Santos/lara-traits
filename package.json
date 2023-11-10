@@ -27,6 +27,5 @@
   },
   "repository": "https://github.com/Isaque-Claudino-dos-Santos/lara-traits",
   "homepage": "https://github.com/Isaque-Claudino-dos-Santos/lara-traits",
-  "type": "module",
   "typings": "dist/index.d.ts"
 }
