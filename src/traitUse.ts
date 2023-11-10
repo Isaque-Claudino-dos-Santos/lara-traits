@@ -7,15 +7,16 @@ export default function traitUse(
 ): void {
   for (const Trait of traits) {
     const trait = new Trait();
+  
     Object.assign(target, { ...trait });
 
-    const props = Object.getOwnPropertyNames(trait);
+    const props = Object.getOwnPropertyNames(Object.getPrototypeOf(trait));
 
     for (const prop of props) {
       const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(trait), prop);
-
+      
       Object.defineProperty(
-        Object.getPrototypeOf(target),
+        target,
         prop,
         descriptor || {}
       );
