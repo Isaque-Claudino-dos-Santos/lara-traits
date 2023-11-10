@@ -6,43 +6,40 @@ describe("Testing method use", () => {
     const keyName = "name";
     const nameValue = faker.person.firstName();
 
-    class A {
+    class BaseTrait {
       [keyName] = nameValue;
     }
 
-    interface C extends A {}
-    class C {
+    interface Parent extends BaseTrait {}
+    class Parent {
       constructor() {
-        trait.use(this, [A]);
+        trait.use(this, [BaseTrait]);
       }
     }
 
-    const c = new C();
+    const parent = new Parent();
 
-    expect(keyName in c).toBeTruthy();
-    expect(c[keyName]).toEqual(nameValue);
+    expect(keyName in parent).toBeTruthy();
+    expect(parent[keyName]).toEqual(nameValue);
   });
 
   test("Should add only one function in object", () => {
-    const name = faker.person.firstName();
-    class A {
-      name = name;
-
-      getName() {
-        return this.name;
+    class BaseTrait {
+      getSequence() {
+        return 1234;
       }
     }
 
-    interface C extends A {}
-    class C {
+    interface Parent extends BaseTrait {}
+    class Parent {
       constructor() {
-        trait.use(this, [A]);
+        trait.use(this, [BaseTrait]);
       }
     }
 
-    const c = new C();
+    const parent = new Parent()
 
-    expect("getName" in c).toBeTruthy();
-    expect(c.getName()).toEqual(name);
+    expect('getSequence' in parent).toBeTruthy()
+    expect(parent.getSequence()).toEqual(1234)
   });
 });
