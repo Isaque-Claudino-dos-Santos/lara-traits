@@ -6,13 +6,13 @@ export default function traitUse(
   traits: Constructor<object>[]
 ): void {
   for (const Trait of traits) {
-    const trait = Object.getPrototypeOf(new Trait())
+    const trait = new Trait();
     Object.assign(target, { ...trait });
 
     const props = Object.getOwnPropertyNames(trait);
 
     for (const prop of props) {
-      const descriptor = Object.getOwnPropertyDescriptor(trait, prop);
+      const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(trait), prop);
 
       Object.defineProperty(
         Object.getPrototypeOf(target),
