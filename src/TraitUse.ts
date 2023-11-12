@@ -1,7 +1,7 @@
-import { Constructor } from "./Types";
-import { PROP_CONSTRUCTORS } from "./bootstrep";
+import { Constructor } from './Types'
+import { PROP_CONSTRUCTORS } from './bootstrep'
 
-type Target = object;
+type Target = object
 
 export default class TraitUse {
   constructor() {
@@ -10,24 +10,24 @@ export default class TraitUse {
 
   mergeProperties(target: Target, traits: Constructor<object>[]): void {
     for (const Trait of traits) {
-      const trait = new Trait();
-      const props = Object.getOwnPropertyNames(trait);
+      const trait = new Trait()
+      const props = Object.getOwnPropertyNames(trait)
 
       for (const prop of props) {
-        const descriptor = Object.getOwnPropertyDescriptor(trait, prop);
-        Object.defineProperty(target, prop, descriptor || {});
+        const descriptor = Object.getOwnPropertyDescriptor(trait, prop)
+        Object.defineProperty(target, prop, descriptor || {})
       }
     }
   }
 
   mergeFunctions(target: Target, traits: Constructor<object>[]): void {
     for (const Trait of traits) {
-      const traitProto = Object.getPrototypeOf(new Trait());
-      const props = Object.getOwnPropertyNames(traitProto);
+      const traitProto = Object.getPrototypeOf(new Trait())
+      const props = Object.getOwnPropertyNames(traitProto)
 
       for (const prop of props) {
-        const descriptor = Object.getOwnPropertyDescriptor(traitProto, prop);
-        Object.defineProperty(target, prop, descriptor || {});
+        const descriptor = Object.getOwnPropertyDescriptor(traitProto, prop)
+        Object.defineProperty(target, prop, descriptor || {})
       }
     }
   }
@@ -38,12 +38,12 @@ export default class TraitUse {
       writable: false,
       configurable: false,
       enumerable: false,
-    });
+    })
   }
 
   use(target: Target, traits: Constructor<object>[]) {
-    this.mergeProperties(target, traits);
-    this.mergeFunctions(target, traits);
-    this.defineConstructosProterty(target, traits);
+    this.mergeProperties(target, traits)
+    this.mergeFunctions(target, traits)
+    this.defineConstructosProterty(target, traits)
   }
 }

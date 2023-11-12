@@ -1,0 +1,8 @@
+{
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "Fira Code",
+  "prettier.enable": true,
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "editor.lineHeight": 1.8
+}
