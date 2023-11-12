@@ -1,7 +1,5 @@
-import { Constructor } from './Types'
+import { Constructor, Target } from './Types'
 import { PROP_CONSTRUCTORS } from './bootstrep'
-
-type Target = object
 
 export default class TraitUse {
   constructor() {
