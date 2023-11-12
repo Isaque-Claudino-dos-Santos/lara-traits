@@ -13,7 +13,8 @@
     "merge",
     "typescript",
     "class",
-    "ts-trait"
+    "ts-trait",
+    "traits"
   ],
   "author": "",
   "license": "ISC",
