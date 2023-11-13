@@ -1,6 +1,6 @@
 {
   "name": "lara-traits",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Trait with Javascritp/Typescript",
   "main": "dist/index.js",
   "scripts": {
@@ -30,5 +30,6 @@
   },
   "repository": "https://github.com/Isaque-Claudino-dos-Santos/lara-traits",
   "homepage": "https://github.com/Isaque-Claudino-dos-Santos/lara-traits",
-  "typings": "dist/index.d.ts"
+  "typings": "dist/index.d.ts",
+  "type": "module"
 }
