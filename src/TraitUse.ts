@@ -18,7 +18,7 @@ export default class TraitUse {
     prop: string,
     descriptor: PropertyDescriptor | undefined
   ) {
-    if (this.ignoreProp(prop)) return
+    if (this.ignoreProp(prop) || prop in context) return
     Object.defineProperty(context, prop, descriptor || {})
   }
   
