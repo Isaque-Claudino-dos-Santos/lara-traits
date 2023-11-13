@@ -46,7 +46,7 @@ rect {
 }
 ```
 
-### Modificadore de Acesso
+### Modificadores de Acesso
 
 #### Privado
 
