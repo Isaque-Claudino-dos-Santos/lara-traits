@@ -1,9 +1,34 @@
+import AccessModifiers from './AccessModifiers'
 import { Constructor, Target } from './Types'
 import { PROP_CONSTRUCTORS } from './bootstrep'
 
 export default class TraitUse {
+  private readonly accessModifier = new AccessModifiers()
+
   constructor() {
     this.use = this.use.bind(this)
+  }
+
+  ignoreProp(prop: string): boolean {
+    return this.accessModifier.contentPrivateModifier(prop)
+  }
+
+  defineProperty(
+    context: object,
+    prop: string,
+    descriptor: PropertyDescriptor | undefined
+  ) {
+    if (this.ignoreProp(prop)) return
+    Object.defineProperty(context, prop, descriptor || {})
+  }
+  
+  defineConstructosProterty(target: Target, traits: Constructor<object>[]) {
+    Object.defineProperty(Object.getPrototypeOf(target), PROP_CONSTRUCTORS, {
+      value: traits,
+      writable: false,
+      configurable: false,
+      enumerable: false,
+    })
   }
 
   mergeProperties(target: Target, traits: Constructor<object>[]): void {
@@ -13,7 +38,7 @@ export default class TraitUse {
 
       for (const prop of props) {
         const descriptor = Object.getOwnPropertyDescriptor(trait, prop)
-        Object.defineProperty(target, prop, descriptor || {})
+        this.defineProperty(target, prop, descriptor)
       }
     }
   }
@@ -25,18 +50,9 @@ export default class TraitUse {
 
       for (const prop of props) {
         const descriptor = Object.getOwnPropertyDescriptor(traitProto, prop)
-        Object.defineProperty(target, prop, descriptor || {})
+        this.defineProperty(target, prop, descriptor)
       }
     }
-  }
-
-  defineConstructosProterty(target: Target, traits: Constructor<object>[]) {
-    Object.defineProperty(Object.getPrototypeOf(target), PROP_CONSTRUCTORS, {
-      value: traits,
-      writable: false,
-      configurable: false,
-      enumerable: false,
-    })
   }
 
   use(target: Target, traits: Constructor<object>[]) {
