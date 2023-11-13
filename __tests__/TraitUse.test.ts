@@ -63,4 +63,22 @@ describe('Use Method Testings', () => {
 
     expect(keyName in parent).toBeFalsy()
   })
+
+  test('Should ignore the function with prefix underscore on merge', () => {
+    class BaseTrait {
+      _getSequence() {
+        return 1234
+      }
+    }
+
+    class Parent {
+      constructor() {
+        traitUse.mergeFunctions(this, [BaseTrait])
+      }
+    }
+
+    const parent = new Parent()
+
+    expect('_getSequence' in parent).toBeFalsy()
+  })
 })
