@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker'
 const traitUse = new TraitUse()
 
 describe('Use Method Testings', () => {
-  test('Should add only one variable in object', () => {
+  test('Should add only one propertie in object', () => {
     const keyName = 'name'
     const nameValue = faker.person.firstName()
 
@@ -43,5 +43,24 @@ describe('Use Method Testings', () => {
 
     expect('getSequence' in parent).toBeTruthy()
     expect(parent.getSequence()).toEqual(1234)
+  })
+
+  test('Should ignore the propertie with prefix underscore on merge', () => {
+    const keyName = '_name' // means private variable
+    const valueName = faker.person.firstName()
+
+    class BaseTrait {
+      [keyName] = valueName
+    }
+
+    class Parent {
+      constructor() {
+        traitUse.mergeProperties(this, [BaseTrait])
+      }
+    }
+
+    const parent = new Parent()
+
+    expect(keyName in parent).toBeFalsy()
   })
 })
