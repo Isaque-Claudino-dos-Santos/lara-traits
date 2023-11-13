@@ -81,4 +81,46 @@ describe('Use Method Testings', () => {
 
     expect('_getSequence' in parent).toBeFalsy()
   })
+
+  test('Should return value overwrite of method', () => {
+    class BaseTrait {
+      getSequence(): number {
+        return 123
+      }
+    }
+
+    class Parent {
+      constructor() {
+        traitUse.mergeFunctions(this, [BaseTrait])
+      }
+
+      getSequence(): number {
+        return 456
+      }
+    }
+
+    const parent = new Parent()
+
+    expect(parent.getSequence()).toEqual(456)
+  })
+
+  test('Should return value overwrite of propertie', () => {
+    const newName = faker.person.firstName()
+
+    class BaseTrait {
+      name = faker.person.firstName()
+    }
+
+    class Parent {
+      name = newName
+
+      constructor() {
+        traitUse.mergeFunctions(this, [BaseTrait])
+      }
+    }
+
+    const parent = new Parent()
+
+    expect(parent.name).toEqual(newName)
+  })
 })
