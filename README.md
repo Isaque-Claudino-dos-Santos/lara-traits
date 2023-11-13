@@ -1,5 +1,7 @@
 # lara-traits
 
+Pacote `NPM` para usar `Trait` no Javascript/Typescript, deforma simples 😎.
+
 ### Importar lara-traits
 ``` typescript
 import trait from 'lara-traits'
