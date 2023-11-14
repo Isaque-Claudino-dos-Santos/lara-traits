@@ -1,5 +1,5 @@
 import AccessModifiers from './AccessModifiers'
-import { Constructor, Target } from './Types'
+import { Constructor, Target, TraitInstance } from './Types'
 import { PROP_CONSTRUCTORS } from './bootstrep'
 
 export default class TraitUse {
@@ -21,8 +21,8 @@ export default class TraitUse {
     if (this.ignoreProp(prop) || prop in context) return
     Object.defineProperty(context, prop, descriptor || {})
   }
-  
-  defineConstructosProterty(target: Target, traits: Constructor<object>[]) {
+
+  defineConstructosProterty(target: Target, traits: Constructor<TraitInstance>[]) {
     Object.defineProperty(target, PROP_CONSTRUCTORS, {
       value: traits,
       writable: false,
@@ -31,9 +31,8 @@ export default class TraitUse {
     })
   }
 
-  mergeProperties(target: Target, traits: Constructor<object>[]): void {
-    for (const Trait of traits) {
-      const trait = new Trait()
+  mergeProperties(target: Target, traitInstances: TraitInstance[]): void {
+    for (const trait of traitInstances) {
       const props = Object.getOwnPropertyNames(trait)
 
       for (const prop of props) {
@@ -43,9 +42,9 @@ export default class TraitUse {
     }
   }
 
-  mergeFunctions(target: Target, traits: Constructor<object>[]): void {
-    for (const Trait of traits) {
-      const traitProto = Object.getPrototypeOf(new Trait())
+  mergeFunctions(target: Target, traitInstances: TraitInstance[]): void {
+    for (const trait of traitInstances) {
+      const traitProto = Object.getPrototypeOf(trait)
       const props = Object.getOwnPropertyNames(traitProto)
 
       for (const prop of props) {
@@ -56,8 +55,9 @@ export default class TraitUse {
   }
 
   use(target: Target, traits: Constructor<object>[]) {
-    this.mergeProperties(target, traits)
-    this.mergeFunctions(target, traits)
+    const traitInstances = traits.map((Trait) => new Trait())
+    this.mergeProperties(target, traitInstances)
+    this.mergeFunctions(target, traitInstances)
     this.defineConstructosProterty(target, traits)
   }
 }

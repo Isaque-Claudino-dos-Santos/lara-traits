@@ -15,7 +15,7 @@ describe('Use Method Testings', () => {
     interface Parent extends BaseTrait {}
     class Parent {
       constructor() {
-        traitUse.mergeProperties(this, [BaseTrait])
+        traitUse.mergeProperties(this, [new BaseTrait()])
       }
     }
 
@@ -35,7 +35,7 @@ describe('Use Method Testings', () => {
     interface Parent extends BaseTrait {}
     class Parent {
       constructor() {
-        traitUse.mergeFunctions(this, [BaseTrait])
+        traitUse.mergeFunctions(this, [new BaseTrait()])
       }
     }
 
@@ -55,7 +55,7 @@ describe('Use Method Testings', () => {
 
     class Parent {
       constructor() {
-        traitUse.mergeProperties(this, [BaseTrait])
+        traitUse.mergeProperties(this, [new BaseTrait()])
       }
     }
 
@@ -73,7 +73,7 @@ describe('Use Method Testings', () => {
 
     class Parent {
       constructor() {
-        traitUse.mergeFunctions(this, [BaseTrait])
+        traitUse.mergeFunctions(this, [new BaseTrait()])
       }
     }
 
@@ -91,7 +91,7 @@ describe('Use Method Testings', () => {
 
     class Parent {
       constructor() {
-        traitUse.mergeFunctions(this, [BaseTrait])
+        traitUse.mergeFunctions(this, [new BaseTrait()])
       }
 
       getSequence(): number {
@@ -115,12 +115,37 @@ describe('Use Method Testings', () => {
       name = newName
 
       constructor() {
-        traitUse.mergeFunctions(this, [BaseTrait])
+        traitUse.mergeFunctions(this, [new BaseTrait()])
       }
     }
 
     const parent = new Parent()
 
     expect(parent.name).toEqual(newName)
+  })
+
+  test('Should show the value proving that the trais has once instance', () => {
+    class GenID {
+      static ID = 0
+      id = 0
+
+      constructor() {
+        GenID.ID++
+        this.id = GenID.ID
+      }
+    }
+
+    interface Parent extends GenID {}
+    class Parent {
+      constructor() {
+        traitUse.use(this, [GenID])
+      }
+    }
+
+    const parent1 = new Parent()
+    const parent2 = new Parent()
+
+    expect(parent1.id).toEqual(1)
+    expect(parent2.id).toEqual(2)
   })
 })
