@@ -1,6 +1,6 @@
 /__tests__
 /src
-/jest.config.js
+/jest.config.ts
 /.gitignore
 /README.md
 /.vscode

@@ -23,7 +23,7 @@ export default class TraitUse {
   }
   
   defineConstructosProterty(target: Target, traits: Constructor<object>[]) {
-    Object.defineProperty(Object.getPrototypeOf(target), PROP_CONSTRUCTORS, {
+    Object.defineProperty(target, PROP_CONSTRUCTORS, {
       value: traits,
       writable: false,
       configurable: false,
