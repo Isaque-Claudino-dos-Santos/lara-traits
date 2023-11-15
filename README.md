@@ -1,6 +1,6 @@
 # lara-traits
 
-Pacote `NPM` para usar `Trait` no Javascript/Typescript, deforma simples 😎.
+Pacote `NPM` para usar `Trait` no Javascript/Typescript, de forma simples 😎.
 
 ### Importar lara-traits
 
@@ -111,8 +111,8 @@ class Rect {
 
 const rect = new Rect()
 
-console.log(trait.instanceOf(rect, Vector2)
-console.log(trait.instanceOf(rect, Events)
+console.log(trait.instanceOf(rect, Vector2))
+console.log(trait.instanceOf(rect, Events))
 ```
 
 CONSOLE.LOG OUTPUT
