@@ -1,6 +1,6 @@
 import AccessModifiers from './AccessModifiers'
 import { Constructor, Target, TraitInstance } from './Types'
-import { PROP_CONSTRUCTORS } from './bootstrep'
+import { IGNORE_CONSTRUCTOR_PROPS, PROP_CONSTRUCTORS } from './bootstrep'
 
 export default class TraitUse {
   private readonly accessModifier = new AccessModifiers()
@@ -22,7 +22,10 @@ export default class TraitUse {
     Object.defineProperty(context, prop, descriptor || {})
   }
 
-  defineConstructosProterty(target: Target, traits: Constructor<TraitInstance>[]) {
+  defineConstructosProterty(
+    target: Target,
+    traits: Constructor<TraitInstance>[]
+  ) {
     Object.defineProperty(target, PROP_CONSTRUCTORS, {
       value: traits,
       writable: false,
@@ -54,10 +57,27 @@ export default class TraitUse {
     }
   }
 
+  mergeStatic(
+    target: Target,
+    traits: Constructor<TraitInstance>[]
+  ): void {
+    for (const trait of traits) {
+      const props = Object.getOwnPropertyNames(trait)
+
+      for (const prop of props) {
+        if (IGNORE_CONSTRUCTOR_PROPS.some((v) => v === prop)) continue
+
+        const descriptor = Object.getOwnPropertyDescriptor(trait, prop)
+        this.defineProperty(target['constructor'], prop, descriptor)
+      }
+    }
+  }
+
   use(target: Target, traits: Constructor<object>[]) {
     const traitInstances = traits.map((Trait) => new Trait())
     this.mergeProperties(target, traitInstances)
     this.mergeFunctions(target, traitInstances)
+    this.mergeStatic(target, traits)
     this.defineConstructosProterty(target, traits)
   }
 }
