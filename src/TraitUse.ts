@@ -1,6 +1,6 @@
 import AccessModifiers from './AccessModifiers'
 import { UseOptions, useOptionsDefaultValues } from './Models/UseOptions'
-import { Constructor, Target, TraitInstance } from './Types'
+import { Constructor } from './Types'
 import { IGNORE_CONSTRUCTOR_PROPS, PROP_CONSTRUCTORS } from './bootstrep'
 
 export default class TraitUse {
@@ -23,10 +23,10 @@ export default class TraitUse {
     Object.defineProperty(context, prop, descriptor || {})
   }
 
-  defineConstructosProterty(
-    target: Target,
-    traits: Constructor<TraitInstance>[]
-  ) {
+  defineConstructosProterty<
+    Target extends object,
+    Traits extends Constructor[]
+  >(target: Target, traits: Traits) {
     Object.defineProperty(target, PROP_CONSTRUCTORS, {
       value: traits,
       writable: false,
@@ -35,7 +35,7 @@ export default class TraitUse {
     })
   }
 
-  merge(target: Target, trait: object, props: string[], options: UseOptions) {
+  merge(target: object, trait: object, props: string[], options: UseOptions) {
     for (const prop of props) {
       if (!options.overrite && prop in target && prop in trait) return
 
@@ -44,11 +44,11 @@ export default class TraitUse {
     }
   }
 
-  mergeProperties(
+  mergeProperties<Target extends object, Traits extends object[]>(
     target: Target,
-    traitInstances: TraitInstance[],
+    traitInstances: Traits,
     options: UseOptions = useOptionsDefaultValues
-  ): void {
+  ) {
     for (const trait of traitInstances) {
       const props = Object.getOwnPropertyNames(trait)
 
@@ -56,9 +56,9 @@ export default class TraitUse {
     }
   }
 
-  mergeFunctions(
+  mergeFunctions<Target extends object, Traits extends object[]>(
     target: Target,
-    traitInstances: TraitInstance[],
+    traitInstances: Traits,
     options: UseOptions = useOptionsDefaultValues
   ): void {
     for (const trait of traitInstances) {
@@ -69,9 +69,9 @@ export default class TraitUse {
     }
   }
 
-  mergeStatic(
+  mergeStatic<Target extends object, Traits extends Constructor[]>(
     target: Target,
-    traits: Constructor<TraitInstance>[],
+    traits: Traits,
     options: UseOptions = useOptionsDefaultValues
   ): void {
     for (const trait of traits) {
@@ -85,9 +85,9 @@ export default class TraitUse {
     }
   }
 
-  use(
+  use<Target extends object, Traits extends Constructor[]>(
     target: Target,
-    traits: Constructor<object>[],
+    traits: Traits,
     options: UseOptions = useOptionsDefaultValues
   ) {
     const traitInstances = traits.map((Trait) => new Trait())
