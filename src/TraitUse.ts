@@ -1,7 +1,7 @@
 import AccessModifiers from './AccessModifiers'
 import { UseOptions, useOptionsDefaultValues } from './Models/UseOptions'
 import { Constructor, Target, TraitInstance } from './Types'
-import { PROP_CONSTRUCTORS } from './bootstrep'
+import { IGNORE_CONSTRUCTOR_PROPS, PROP_CONSTRUCTORS } from './bootstrep'
 
 export default class TraitUse {
   private readonly accessModifier = new AccessModifiers()
@@ -69,6 +69,22 @@ export default class TraitUse {
     }
   }
 
+  mergeStatic(
+    target: Target,
+    traits: Constructor<TraitInstance>[],
+    options: UseOptions = useOptionsDefaultValues
+  ): void {
+    for (const trait of traits) {
+      const props = Object.getOwnPropertyNames(trait)
+
+      for (const prop of props) {
+        if (IGNORE_CONSTRUCTOR_PROPS.some((v) => v === prop)) continue
+
+        this.merge(target['constructor'], trait, props, options)
+      }
+    }
+  }
+
   use(
     target: Target,
     traits: Constructor<object>[],
@@ -77,6 +93,7 @@ export default class TraitUse {
     const traitInstances = traits.map((Trait) => new Trait())
     this.mergeProperties(target, traitInstances, options)
     this.mergeFunctions(target, traitInstances, options)
+    this.mergeStatic(target, traits, options)
     this.defineConstructosProterty(target, traits)
   }
 }

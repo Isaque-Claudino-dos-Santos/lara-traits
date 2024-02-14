@@ -200,4 +200,71 @@ describe('Use Method Testings', () => {
     expect(base.getName()).not.toBe(traitReturnValue)
     expect(base.getName()).toBe(baseReturnValue)
   })
+  it('should define static propertie in class', () => {
+    const key = 'staticPropKey'
+    const value = faker.animal.dog()
+
+    class BaseTrait {
+      static [key] = value
+    }
+
+    class Main {
+      constructor() {
+        traitUse.use(this, [BaseTrait])
+      }
+    }
+
+    expect(key in new Main()).toBeFalsy()
+    expect(key in Main).toBeTruthy()
+    expect(Main[key]).toBe(value)
+    expect(BaseTrait[key]).toBe(value)
+  })
+
+  it('should update static propertie value', () => {
+    const key = 'staticPropKey'
+    const initValue = faker.animal.cat()
+    const newValue = faker.animal.bird()
+
+    class BaseTrait {
+      static [key] = initValue
+    }
+
+    class Main {
+      constructor() {
+        traitUse.use(this, [BaseTrait])
+      }
+    }
+
+    expect(key in new Main()).toBeFalsy()
+    expect(Main[key]).toBe(initValue)
+    expect(BaseTrait[key]).toBe(initValue)
+
+    Main[key] = newValue
+
+    expect(Main[key]).toBe(newValue)
+    expect(BaseTrait[key]).toBe(initValue)
+  })
+
+  it('should add static method', () => {
+    const methodName = 'staticMethod'
+    const methodReturn = faker.number.int()
+    const methodParam = faker.number.int()
+    const expectedMethodReturn = methodReturn + methodParam
+
+    class BaseTrait {
+      static [methodName](n: number) {
+        return methodReturn + n
+      }
+    }
+
+    class Main {
+      constructor() {
+        traitUse.use(this, [BaseTrait])
+      }
+    }
+
+    expect(methodName in new Main()).toBeFalsy()
+    expect(methodName in Main).toBeTruthy()
+    expect(Main[methodName](methodParam)).toBe(expectedMethodReturn)
+  })
 })
