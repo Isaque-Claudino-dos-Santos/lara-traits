@@ -148,4 +148,56 @@ describe('Use Method Testings', () => {
     expect(parent1.id).toEqual(1)
     expect(parent2.id).toEqual(2)
   })
+
+  it('should not overrite properties', () => {
+    const traitPropValue = faker.person.firstName()
+    const basePropValue = faker.person.firstName()
+
+    class MyTrait {
+      name = traitPropValue
+    }
+
+    class Base {
+      name = basePropValue
+
+      constructor() {
+        traitUse.mergeProperties(this, [MyTrait], {
+          overrite: false,
+        })
+      }
+    }
+
+    const base = new Base()
+
+    expect(base.name).not.toBe(traitPropValue)
+    expect(base.name).toBe(basePropValue)
+  })
+
+  it('should not overrite functions', () => {
+    const traitReturnValue = faker.person.firstName()
+    const baseReturnValue = faker.person.firstName()
+
+    class MyTrait {
+      getName() {
+        return traitReturnValue
+      }
+    }
+
+    class Base {
+      constructor() {
+        traitUse.mergeFunctions(this, [MyTrait], {
+          overrite: false,
+        })
+      }
+
+      getName() {
+        return baseReturnValue
+      }
+    }
+
+    const base = new Base()
+
+    expect(base.getName()).not.toBe(traitReturnValue)
+    expect(base.getName()).toBe(baseReturnValue)
+  })
 })

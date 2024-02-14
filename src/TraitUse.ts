@@ -1,4 +1,5 @@
 import AccessModifiers from './AccessModifiers'
+import { UseOptions, useOptionsDefaultValues } from './Models/UseOptions'
 import { Constructor, Target, TraitInstance } from './Types'
 import { PROP_CONSTRUCTORS } from './bootstrep'
 
@@ -22,7 +23,10 @@ export default class TraitUse {
     Object.defineProperty(context, prop, descriptor || {})
   }
 
-  defineConstructosProterty(target: Target, traits: Constructor<TraitInstance>[]) {
+  defineConstructosProterty(
+    target: Target,
+    traits: Constructor<TraitInstance>[]
+  ) {
     Object.defineProperty(target, PROP_CONSTRUCTORS, {
       value: traits,
       writable: false,
@@ -31,33 +35,48 @@ export default class TraitUse {
     })
   }
 
-  mergeProperties(target: Target, traitInstances: TraitInstance[]): void {
-    for (const trait of traitInstances) {
-      const props = Object.getOwnPropertyNames(trait)
+  merge(target: Target, trait: object, props: string[], options: UseOptions) {
+    for (const prop of props) {
+      if (!options.overrite && prop in target && prop in trait) return
 
-      for (const prop of props) {
-        const descriptor = Object.getOwnPropertyDescriptor(trait, prop)
-        this.defineProperty(target, prop, descriptor)
-      }
+      const descriptor = Object.getOwnPropertyDescriptor(trait, prop)
+      this.defineProperty(target, prop, descriptor)
     }
   }
 
-  mergeFunctions(target: Target, traitInstances: TraitInstance[]): void {
+  mergeProperties(
+    target: Target,
+    traitInstances: TraitInstance[],
+    options: UseOptions = useOptionsDefaultValues
+  ): void {
+    for (const trait of traitInstances) {
+      const props = Object.getOwnPropertyNames(trait)
+
+      this.merge(target, trait, props, options)
+    }
+  }
+
+  mergeFunctions(
+    target: Target,
+    traitInstances: TraitInstance[],
+    options: UseOptions = useOptionsDefaultValues
+  ): void {
     for (const trait of traitInstances) {
       const traitProto = Object.getPrototypeOf(trait)
       const props = Object.getOwnPropertyNames(traitProto)
 
-      for (const prop of props) {
-        const descriptor = Object.getOwnPropertyDescriptor(traitProto, prop)
-        this.defineProperty(target, prop, descriptor)
-      }
+      this.merge(target, traitProto, props, options)
     }
   }
 
-  use(target: Target, traits: Constructor<object>[]) {
+  use(
+    target: Target,
+    traits: Constructor<object>[],
+    options: UseOptions = useOptionsDefaultValues
+  ) {
     const traitInstances = traits.map((Trait) => new Trait())
-    this.mergeProperties(target, traitInstances)
-    this.mergeFunctions(target, traitInstances)
+    this.mergeProperties(target, traitInstances, options)
+    this.mergeFunctions(target, traitInstances, options)
     this.defineConstructosProterty(target, traits)
   }
 }
